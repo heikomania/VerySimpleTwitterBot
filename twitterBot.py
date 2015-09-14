@@ -1,4 +1,4 @@
-import requests, bs4, re, TwitterAPI
+import requests, bs4, re, TwitterAPI, textwrap
 
 # Set up twitter
 consumerKey = "yourConsumerKey"
@@ -38,7 +38,11 @@ for singleArticle in webArticleText:
 	articelTexts.append(singleArticle.text)
 
 def postToTwitter():
-	tweetText = titles[0] + ' ' + links[0]
+	if len(titles[0]) > 120:
+		trimmedHeadline = textwrap.wrap(titles[0], 110)
+		tweetText = trimmedHeadline[0] + ' ... ' + links[0]
+	else:
+		tweetText = titles[0] + '  ' + links[0]
 	tweet = apiCall.request('statuses/update', {'status': tweetText})
 	print('SUCCES' if tweet.status_code == 200 else 'FAILURE')
 
