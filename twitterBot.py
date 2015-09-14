@@ -6,11 +6,13 @@ consumerSecret = "yourConsumerSecret"
 accessTokenKey = "yourAccessTokenKey"
 accessTokenSecret = "yourAccessTokenSecret"
 
+urlToCrawl = 'http://hagen-atw.de/aktuelle-meldungen.html'
+
 # connect to twitter
 apiCall = TwitterAPI.TwitterAPI(consumerKey, consumerSecret, accessTokenKey, accessTokenSecret)
 
 # make a request of the website
-res = requests.get('http://hagen-atw.de/aktuelle-meldungen.html')
+res = requests.get(urlToCrawl)
 res.raise_for_status()
 
 # parse the url
